@@ -18,6 +18,36 @@
 	
 	@include font-face("foundation-icons", font-files("foundation-icons.eot","foundation-icons.ttf", "foundation-icons.woff"));
     @include font-face("FontAwesome", font-files("fontawesome-webfont.eot", "fontawesome-webfont.ttf", "fontawesome-webfont.woff"));
+    
+    @include font-face("archer-bold", font-files("archer-bold-webfont.eot","archer-bold-webfont.ttf", "archer-bold-webfont.woff"));
+    $archer-bold: "archer-bold", "Arial", "Helvetica", sans-serif !default;
+    .archer-bold{
+	    font-family: $archer-bold !important;
+    }
+    
+    @include font-face("gotham-medium", font-files("gotham-medium-webfont.eot","gotham-medium-webfont.ttf", "gotham-medium-webfont.woff"));
+    $gotham-medium: "gotham-medium", "Arial", "Helvetica", sans-serif !default;
+    .gotham-medium{
+	    font-family: $gotham-medium !important;
+    }
+    
+    @include font-face("gotham-book", font-files("gotham-book-webfont.eot","gotham-book-webfont.ttf", "gotham-book-webfont.woff"));
+    $gotham-book: "gotham-book", "Arial", "Helvetica", sans-serif !default;
+    .gotham-book{
+	    font-family: $gotham-book !important;
+    }
+
+    @include font-face("gotham-bold", font-files("gotham-bold-webfont.eot","gotham-bold-webfont.ttf", "gotham-bold-webfont.woff"));
+    $gotham-bold: "gotham-bold", "Arial", "Helvetica", sans-serif !default;
+    .gotham-bold{
+	    font-family: $gotham-bold !important;
+    }
+
+    @include font-face("gotham-black", font-files("gotham-black-webfont.eot","gotham-black-webfont.ttf", "gotham-black-webfont.woff"));
+    $gotham-black: "gotham-black", "Arial", "Helvetica", sans-serif !default;
+    .gotham-black{
+	    font-family: $gotham-black !important;
+    }
 	
 	//Default Font Families, Adjustments etc
 	$default-font-family: "Arial", "Helvetica", sans-serif !default;
@@ -52,20 +82,20 @@
 //  ==========================================================================
 
     $h1map: (fontSize: 100px, lineHeight: 110px, letterSpacing: -4px);
-    $h2map: (fontSize: 40px, lineHeight: 48px, letterSpacing: -3px);
-    $h3map: (fontSize: 28px, lineHeight: 34px, letterSpacing: -2px);
+    $h2map: (fontSize: 40px, lineHeight: 48px, letterSpacing: -1px);
+    $h3map: (fontSize: 28px, lineHeight: 34px, letterSpacing: -1px);
     $h4map: (fontSize: 18px, lineHeight: 24px, letterSpacing: 0px);
     $h5map: (fontSize: 14px, lineHeight: 22px, letterSpacing: 0px);
     
-    $h1map_959: (fontSize: 65px, lineHeight: 74px, letterSpacing: -4px);
-    $h2map_959: (fontSize: 38px, lineHeight: 48px, letterSpacing: -3px);
-    $h3map_959: (fontSize: 30px, lineHeight: 42px, letterSpacing: -2px);
+    $h1map_959: (fontSize: 65px, lineHeight: 74px, letterSpacing: -3px);
+    $h2map_959: (fontSize: 38px, lineHeight: 48px, letterSpacing: -1px);
+    $h3map_959: (fontSize: 30px, lineHeight: 42px, letterSpacing: -1px);
     $h4map_959: (fontSize: 20px, lineHeight: 24px, letterSpacing: 0px);
     $h5map_959: (fontSize: 14px, lineHeight: 22px, letterSpacing: 0px);
     
-    $h1map_640: (fontSize: 42px, lineHeight: 43px, letterSpacing: -2px);
-    $h2map_640: (fontSize: 32px, lineHeight: 42px, letterSpacing: -2px);
-    $h3map_640: (fontSize: 18px, lineHeight: 22px, letterSpacing: -1px);
+    $h1map_640: (fontSize: 42px, lineHeight: 43px, letterSpacing: -1px);
+    $h2map_640: (fontSize: 32px, lineHeight: 42px, letterSpacing: 0px);
+    $h3map_640: (fontSize: 18px, lineHeight: 22px, letterSpacing: 0px);
     $h4map_640: (fontSize: 14px, lineHeight: 18px, letterSpacing: 0px);
     $h5map_640: (fontSize: 14px, lineHeight: 18px, letterSpacing: 0px);
 

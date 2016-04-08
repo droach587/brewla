@@ -54,6 +54,14 @@ var mainJs = (function () {
 				e.preventDefault();
 			});
 		}
+		
+		function slickSlider(){
+			$('.hero__container').slick({
+				fade: true,
+				dots: true,
+				arrows: false,
+			});		
+		}
  		
  		/**
  		 * Simple Init Function
@@ -63,6 +71,7 @@ var mainJs = (function () {
         function init() {
             mobileNav();
             search();
+            slickSlider();
         }
  
  

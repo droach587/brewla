@@ -28,12 +28,15 @@
 		@extend .full-width;
 		li{
 			@extend .full-width;
-			font: normal 12px sans-serif;
+			font-family: $gotham-bold;
+			font-size: 12px;
 			color: white;
 			text-transform: uppercase;
 			padding: 2px 0;
+			white-space: nowrap;
 			a{
 				color: white;
+				display: inline-block;
 				@include transition-duration(.2s);
 				@include transition-property(all);
 				&:hover{
@@ -62,8 +65,21 @@
 		}
 	}
 	
+	@media screen and (max-width:640px){
+		.primary-footer__nav{
+			padding-left: 0px;
+		}
+		.primary-footer__nav--lc-horz{
+			text-align: center;
+			li + li{
+				border-left: none;
+			}
+		}
+	}
+	
 	.primary-nav{
-		font: normal 12px sans-serif;
+		font-family: $gotham-bold;
+		font-size: 12px;
 		color: white;
 		text-transform: uppercase;
 		text-align: center;
@@ -146,6 +162,8 @@
 			font-size: 20px;
 			background: white;
 			border: none;
+			font-family: $archer-bold;
+			color: $client-blue;
 		}
 		
 		button[type="submit"]{
@@ -188,26 +206,30 @@
 	}
 	
 	.hero{
-		position: absolute;
-		top: 90px;
-		height: 80%;
-		min-height: 500px;
-		width: 100%;
+		@extend .full-width;
 	}
 	
 	.hero--push{
-		top: 80%;
+		@extend .full-width;
+	}
+	
+	
+	.hero__container{
+		@extend .full-width;
 	}
 	
 	.hero__slide{
-		position: absolute;
-		top: 0px;
-		left: 0px;
+		@extend .float-left;
 		width: 100%;
-		height: 100%;
-		z-index: 2;
+		min-height: 768px !important;
 		background: image-url('hero-background-fpo.jpg') center center no-repeat;
 		@include background-size(cover);
+	}
+	
+	@media screen and (max-width:640px){
+		.hero__slide{
+			min-height: 350px !important;
+		}
 	}
 	
 	.hero__bar{
@@ -241,7 +263,7 @@
 		}
 	}
 	
-	@media screen and (max-width: 770px){
+	@media screen and (max-width: 800px){
 		.primary-header{
 			position: fixed;
 		    top: 0px;
@@ -261,10 +283,6 @@
 				display: block;
 				visibility: visible;
 			}
-		}
-		.hero{
-			top: 78px;
-			height: 500px;
 		}
 		.mobile-nav-toggle{
 			border: 1px solid lighten($client-red,10%);
@@ -336,31 +354,50 @@
 				@include transform(none);
 			}
 		}
-		.hero--push{
-			top: 500px;
+		.hero{
+			margin-top: 78px;
 		}
 	}
 	
 	.image-card{
 		position: absolute;
 		height: 100%;
-		background-position: center center center;
+		background-position: center center;
 		background-repeat: no-repeat;
 		@include background-size(cover);
 	}
 	
 	.image-card-7--left{
 		left: 0px;
+		background-position: center top;
 	}
 	
 	.image-card-push-5{
 		margin-left: 58.33333%;
 	}
 	
+	@media screen and (max-width:1024px){
+		.image-card-push-5{
+			margin-left: 0;
+		}
+		.image-card--stack-med{
+			float: left;
+			position: relative;
+			width: 100%;
+			min-height: 350px;
+		}
+	}
+	
 	.image-card--text{
 		padding: 110px 40px;
 		background: #10326e;
 		@include box-sizing(border-box);
+	}
+	
+	@media screen and (max-width: 640px){
+		.image-card--text{
+			padding: 60px 15px;
+		}
 	}
 	
 	
@@ -416,6 +453,16 @@
 		}
 	}
 	
+	@media screen and (max-width:1024px){
+		.photo-grid{
+			float: left;
+			position: relative;
+			min-height: 400px;
+			width: 100%;
+			left: 0px;
+		}
+	}
+	
 	.large-twitter{
 		font-size: 108px;
 		color: white;
@@ -431,6 +478,20 @@
 	
 	.section--no-padding{
 		padding: 0;
+	}
+	
+	@media screen and (max-width:640px){
+		.section{
+			padding: 30px 15px;
+		}
+		
+		.section--med-padding{
+			padding: 20px 15px;
+		}
+		
+		.section--no-padding{
+			padding: 0;
+		}
 	}	
 	
 	.section--white{
@@ -444,7 +505,8 @@
 	.btn{
 		display: inline-block;
 		color: white;
-		font: normal 17px sans-serif;
+		font-family: $gotham-bold;
+		font-size: 17px;
 		text-transform: uppercase;
 		padding: 5px 10px;
 		min-width: 150px;
@@ -458,4 +520,33 @@
 		&:hover{
 			opacity: .8;
 		}
+	}
+	
+	.link{
+		font-family: $gotham-black;
+		color: black;
+		text-decoration: underline !important;
+		&:hover{
+			color: $client-red;
+		}
+	}
+	
+	@media screen and (max-width:640px){
+		.full-image-small{
+			img{
+				width: 100% !important;
+				height: auto !important;
+			}
+		}
+	}
+	
+	@media screen and (max-width:1024px){
+		.clear-medium{
+			clear: left;
+		}
+	}
+	
+	.break-work{
+		word-break: break-word;
+		word-wrap: break-word;
 	}
