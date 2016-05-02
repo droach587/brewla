@@ -1,5 +1,5 @@
 <?php ?>
-<section class="primary-content">
+<section class="primary-content full-width">
 <?php $firstClass = 'first-post'; ?>
 
 <?php /* If there are no posts to display, such as an empty archive page */ ?>
