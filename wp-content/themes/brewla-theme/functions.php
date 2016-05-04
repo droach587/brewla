@@ -922,11 +922,7 @@ function get_latest_tweets_func(){
             # Access as an object
             $tweetText = $tweet->text;
             # Make links active
-            $tweetText = preg_replace("#(http://|(www.))(([^s<]{4,68})[^s<]*)#", '<a href="http://$2$3" target="_blank">$1$2$4</a>', $tweetText);
-            # Linkify user mentions
-            $tweetText = preg_replace("/@(w+)/", '<a href="http://www.twitter.com/$1" target="_blank">@$1</a>', $tweetText);
-            # Linkify tags
-            $tweetText = preg_replace("/#(w+)/", '<a href="http://search.twitter.com/search?q=$1" target="_blank">#$1</a>', $tweetText);
+            $tweetText = preg_replace("#(https://|(www.))(([^s<]{4,68})[^s<]*)#", '<a href="http://$2$3" target="_blank">$1$2$4</a>', $tweetText);
             # Output
             echo $tweetText;
         }
