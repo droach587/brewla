@@ -849,10 +849,10 @@ function get_latest_ig(){
                 echo '<div class="photo photo--half" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
              }
              if($i === 3){
-                echo '<div class="photo photo--third photo--push" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
+                echo '<div class="photo photo--third hide-for-small photo--push" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
              }
              if($i === 4){
-                echo '<div class="photo photo--third photo--push photo--push-left" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
+                echo '<div class="photo photo--third photo--push photo--push-left photo-third--expand-small" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
              }
 		 	$i++;
 	 	}
