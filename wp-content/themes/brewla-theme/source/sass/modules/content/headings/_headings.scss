@@ -5,7 +5,7 @@ name: headings
 category: Content
 ---
 
-These are the heading sizes that you can use site wide. To use these headings either use a native heading element or use the classes listed below:  
+These are the heading sizes that you can use site wide. To use these headings either use a native heading element or use the classes listed below:
 
 Class                     | Size
 ------------------------- | ----------------
@@ -79,7 +79,7 @@ $heading-slug: hdg !default;
            letter-spacing: #{map-get($h4map, letterSpacing)};
         }
         @if $i == 5{
-          font-size: #{map-get($h5map, fontSize)}; 
+          font-size: #{map-get($h5map, fontSize)};
           line-height: #{map-get($h5map, lineHeight)};
           letter-spacing: #{map-get($h5map, letterSpacing)};
         }
@@ -94,6 +94,12 @@ $heading-slug: hdg !default;
 
 .hdg--white{
 	color: white;
+	a , a:visited, a:active{
+    	color: white;
+    	&:hover{
+        	text-decoration: underline !important;
+    	}
+	}
 }
 
 .hdg--red{
