@@ -2,21 +2,26 @@
 
 add_theme_support( 'menus' );
 
+require "twitteroauth/autoload.php";
+
+use Abraham\TwitterOAuth\TwitterOAuth;
+
+
 if ( function_exists('register_sidebar') )
-	register_sidebar(array(
-		'before_widget' => '<aside>',
-		'after_widget' => '</aside>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>',
-));
+    register_sidebar(array(
+            'before_widget' => '<aside>',
+            'after_widget' => '</aside>',
+            'before_title' => '<h3>',
+            'after_title' => '</h3>',
+        ));
 
 add_post_type_support('page', 'excerpt');
 
 function post_comments( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-		case '' :
-	?>
+    $GLOBALS['comment'] = $comment;
+    switch ( $comment->comment_type ) :
+    case '' :
+?>
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 		<div id="comment-<?php comment_ID(); ?>">
 		<div class="comment-author vcard">
@@ -43,36 +48,36 @@ function post_comments( $comment, $args, $depth ) {
 	</div>
 
 	<?php
-			break;
-		case 'pingback'  :
-		case 'trackback' :
-	?>
+    break;
+case 'pingback'  :
+case 'trackback' :
+?>
 
 	<li class="post pingback">
 		<p><?php _e( 'Pingback:' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)' ), ' ' ); ?></p>
 	<?php
 
-		break;
-	endswitch;
+    break;
+    endswitch;
 }
 
 // Custom functions
 
 /* nav menus */
 if ( function_exists( 'register_nav_menu' ) ) {
-	register_nav_menu('main_nav_left', __('Header Navigation Left'));
-	register_nav_menu('main_nav_right', __('Header Navigation Right'));
-	register_nav_menu('main_nav_social', __('Header Navigation Social'));
+    register_nav_menu('main_nav_left', __('Header Navigation Left'));
+    register_nav_menu('main_nav_right', __('Header Navigation Right'));
+    register_nav_menu('main_nav_social', __('Header Navigation Social'));
 
-	register_nav_menu('footer_nav_col_one', __('Footer Navigation One'));
-	register_nav_menu('footer_nav_col_two', __('Footer Navigation Two'));
-	register_nav_menu('footer_nav_col_three', __('Footer Navigation Three'));
-	register_nav_menu('footer_nav_legal', __('Footer Navigation Legal'));
+    register_nav_menu('footer_nav_col_one', __('Footer Navigation One'));
+    register_nav_menu('footer_nav_col_two', __('Footer Navigation Two'));
+    register_nav_menu('footer_nav_col_three', __('Footer Navigation Three'));
+    register_nav_menu('footer_nav_legal', __('Footer Navigation Legal'));
 }
 
 function pull_all_hp_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'hp-hero',
         'posts_per_page'=>30,
@@ -81,16 +86,16 @@ function pull_all_hp_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = get_field("pop_image", $post->ID);
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = get_field("pop_image", $post->ID);
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		echo '
+        echo '
 			<div class="hero__slide" style="background-image: url('.$bgImage.') !important;">
 		        <div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 		        <div class="hero__content-box">
@@ -99,14 +104,14 @@ function pull_all_hp_hero(){
 		        </div>
 			</div>
 		';
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_faq_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'faqs-hero',
         'posts_per_page'=>30,
@@ -115,17 +120,17 @@ function pull_all_faq_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -134,8 +139,8 @@ function pull_all_faq_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -143,17 +148,17 @@ function pull_all_faq_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_jobs_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'jobs-hero',
         'posts_per_page'=>30,
@@ -162,17 +167,17 @@ function pull_all_jobs_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -181,8 +186,8 @@ function pull_all_jobs_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -190,10 +195,10 @@ function pull_all_jobs_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
@@ -201,7 +206,7 @@ function pull_all_jobs_hero(){
 
 function pull_all_about_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'about-hero',
         'posts_per_page'=>30,
@@ -210,17 +215,17 @@ function pull_all_about_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -229,8 +234,8 @@ function pull_all_about_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -238,17 +243,17 @@ function pull_all_about_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_press_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'press-hero',
         'posts_per_page'=>30,
@@ -257,17 +262,17 @@ function pull_all_press_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -276,8 +281,8 @@ function pull_all_press_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -285,17 +290,17 @@ function pull_all_press_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_blog_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'blog-hero',
         'posts_per_page'=>30,
@@ -304,17 +309,17 @@ function pull_all_blog_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -323,8 +328,8 @@ function pull_all_blog_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -332,10 +337,10 @@ function pull_all_blog_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
@@ -343,7 +348,7 @@ function pull_all_blog_hero(){
 
 function pull_all_shop_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'shop-hero',
         'posts_per_page'=>30,
@@ -352,17 +357,17 @@ function pull_all_shop_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -371,8 +376,8 @@ function pull_all_shop_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -380,17 +385,17 @@ function pull_all_shop_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_flavors_hero(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'flavors-hero',
         'posts_per_page'=>30,
@@ -399,17 +404,17 @@ function pull_all_flavors_hero(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$bgImage = get_field("background_image", $post->ID);
-		$productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
-		$headline = get_field("headline", $post->ID);
-		$subHeadline = get_field("sub_headline", $post->ID);
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
 
-		if($productImage){
-			echo '
+        if($productImage){
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
 				<div class="hero__content-box">
@@ -418,8 +423,8 @@ function pull_all_flavors_hero(){
 			        </div>
 				</div>
 			';
-		}else{
-			echo '
+        }else{
+            echo '
 				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
 				<div class="hero__content-box">
 				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
@@ -427,24 +432,24 @@ function pull_all_flavors_hero(){
 			        </div>
 				</div>
 			';
-		}
+        }
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_hp_about_lead(){
 
-	$page = get_page_by_title( 'About Us' );
-	$featuredImage = get_field("founders_pic", $page->ID);
-	$headline = get_field("homepage_headline", $page->ID);
-	$excerpt = get_field("homepage_excerpt", $page->ID);
-	$link = get_field("homepage_link", $page->ID);
-	$signature = get_field("homepage_signature", $page->ID);
+    $page = get_page_by_title( 'About Us' );
+    $featuredImage = get_field("founders_pic", $page->ID);
+    $headline = get_field("homepage_headline", $page->ID);
+    $excerpt = get_field("homepage_excerpt", $page->ID);
+    $link = get_field("homepage_link", $page->ID);
+    $signature = get_field("homepage_signature", $page->ID);
 
-	echo '
+    echo '
 		<div class="columns large-4 medium-6 large-offset-0 medium-offset-3 small-12 large-text-right full-image-small">
 	        <img src="'.$featuredImage.'" width="90%" height="auto">
         </div>
@@ -469,15 +474,15 @@ function pull_all_hp_about_lead(){
 
 function pull_about_lead(){
 
-	$page = get_page_by_title( 'About Us' );
-	$featuredImage = get_field("founders_pic", $page->ID);
-	$headline = get_field("homepage_headline", $page->ID);
-	$excerpt = get_field("homepage_excerpt", $page->ID);
-	$link = get_field("homepage_link", $page->ID);
-	$signature = get_field("homepage_signature", $page->ID);
-	$content = apply_filters('the_content', $page->post_content);
+    $page = get_page_by_title( 'About Us' );
+    $featuredImage = get_field("founders_pic", $page->ID);
+    $headline = get_field("homepage_headline", $page->ID);
+    $excerpt = get_field("homepage_excerpt", $page->ID);
+    $link = get_field("homepage_link", $page->ID);
+    $signature = get_field("homepage_signature", $page->ID);
+    $content = apply_filters('the_content', $page->post_content);
 
-	echo '
+    echo '
 		<div class="columns large-4 medium-6 large-offset-0 medium-offset-3 small-12 large-text-right full-image-small">
 	        <img src="'.$featuredImage.'" width="90%" height="auto">
         </div>
@@ -505,24 +510,24 @@ function pull_about_lead(){
 
 function pull_about_buckets(){
 
-	$page = get_page_by_title( 'About Us' );
+    $page = get_page_by_title( 'About Us' );
 
-	$headlineOne = get_field("bucket_one_heading", $page->ID);
-	$subHeadlineOne = get_field("bucket_one_sub_heading", $page->ID);
-	$headlineOneCTA = get_field("bucket_one_link_cta", $page->ID);
-	$headlineOneURL = get_field("bucket_one_link_url", $page->ID);
+    $headlineOne = get_field("bucket_one_heading", $page->ID);
+    $subHeadlineOne = get_field("bucket_one_sub_heading", $page->ID);
+    $headlineOneCTA = get_field("bucket_one_link_cta", $page->ID);
+    $headlineOneURL = get_field("bucket_one_link_url", $page->ID);
 
-	$headlineTwo = get_field("bucket_two_heading", $page->ID);
-	$subHeadlineTwo = get_field("bucket_two_sub_heading", $page->ID);
-	$headlineTwoCTA = get_field("bucket_two_link_cta", $page->ID);
-	$headlineTwoURL = get_field("bucket_two_link_url", $page->ID);
+    $headlineTwo = get_field("bucket_two_heading", $page->ID);
+    $subHeadlineTwo = get_field("bucket_two_sub_heading", $page->ID);
+    $headlineTwoCTA = get_field("bucket_two_link_cta", $page->ID);
+    $headlineTwoURL = get_field("bucket_two_link_url", $page->ID);
 
-	$headlineThree = get_field("bucket_three_heading", $page->ID);
-	$subHeadlineThree = get_field("bucket_three_sub_heading", $page->ID);
-	$headlineThreeCTA = get_field("bucket_three_link_cta", $page->ID);
-	$headlineThreeURL = get_field("bucket_three_link_url", $page->ID);
+    $headlineThree = get_field("bucket_three_heading", $page->ID);
+    $subHeadlineThree = get_field("bucket_three_sub_heading", $page->ID);
+    $headlineThreeCTA = get_field("bucket_three_link_cta", $page->ID);
+    $headlineThreeURL = get_field("bucket_three_link_url", $page->ID);
 
-	echo '
+    echo '
 		<div class="columns large-4 medium-4 small-12 text-center">
 		    <div class="hdg hdg--4 red-text uppercase archer-bold">'.$headlineOne.'</div>
 		    <div class="hdg hdg--5 gotham-book">'.$subHeadlineOne.'</div>
@@ -543,16 +548,16 @@ function pull_about_buckets(){
 
 function pull_stick_with_us(){
 
-	$page = get_page_by_title( 'Stick With Us' );
-	$copy = get_field("modal_copy", $page->ID);
+    $page = get_page_by_title( 'Stick With Us' );
+    $copy = get_field("modal_copy", $page->ID);
 
-	echo $copy;
+    echo $copy;
 }
 
 
 function pull_all_flavors(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'flavors',
         'posts_per_page'=>30,
@@ -561,20 +566,20 @@ function pull_all_flavors(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$boxImage = get_field("box_image", $post->ID);
-		$gmo = (get_field("gmo_tag", $post->ID))? '<img class="inline-block push--30" src="/wp-content/themes/brewla-theme/assets/img/gmo2x.png" width="60" height="auto">' : '';
-		$tagline = get_field("flavor_tagline", $post->ID);
-		$flavor = get_field("flavor_title", $post->ID);
-		$headlineColor = get_field("headline_color", $post->ID);
-		$desc = get_field("flavor_description", $post->ID);
-		$benefits = get_field("flavor_benefits", $post->ID);
-		$nutrition = get_field("nutrition_facts", $post->ID);
+        $boxImage = get_field("box_image", $post->ID);
+        $gmo = (get_field("gmo_tag", $post->ID))? '<img class="inline-block push--30" src="/wp-content/themes/brewla-theme/assets/img/gmo2x.png" width="60" height="auto">' : '';
+        $tagline = get_field("flavor_tagline", $post->ID);
+        $flavor = get_field("flavor_title", $post->ID);
+        $headlineColor = get_field("headline_color", $post->ID);
+        $desc = get_field("flavor_description", $post->ID);
+        $benefits = get_field("flavor_benefits", $post->ID);
+        $nutrition = get_field("nutrition_facts", $post->ID);
 
-		echo '
+        echo '
 			<div class="full-width alternating-rows__row">
 				<div class="row">
 					<div class="columns large-12">
@@ -597,14 +602,14 @@ function pull_all_flavors(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_faqs(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'faqs',
         'posts_per_page'=>300,
@@ -613,14 +618,14 @@ function pull_all_faqs(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$question = get_field("question", $post->ID);
-		$answer = get_field("answer", $post->ID);
+        $question = get_field("question", $post->ID);
+        $answer = get_field("answer", $post->ID);
 
-		echo '
+        echo '
 			<div class="columns small-12 content-row clear-left">
 				<div class="hdg hdg--4 gotham-bold">'.$question.'</div>
 				<div class="hdg hdg--4 gotham-book push--10">'.$answer.'</div>
@@ -628,14 +633,14 @@ function pull_all_faqs(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_press(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'press',
         'posts_per_page'=>3,
@@ -644,13 +649,13 @@ function pull_all_press(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$thumbnail = get_field("press_page_thumbnail", $post->ID);
+        $thumbnail = get_field("press_page_thumbnail", $post->ID);
 
-		echo '
+        echo '
 			<div class="columns small-12 medium-4 large-4 grid-item article">
 				<img src="'.$thumbnail.'" width="100%" height="auto">
 				<div class="hdg hdg--4 uppercase red-text text-center gotham-medium push--20">'.$post->post_title.'</div>
@@ -662,14 +667,14 @@ function pull_all_press(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_blog(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'blog',
         'posts_per_page'=>3,
@@ -678,11 +683,11 @@ function pull_all_blog(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		echo '
+        echo '
 			<div class="columns small-12 medium-4 large-4 grid-item article">
 				<div class="hdg hdg--4 uppercase red-text text-center gotham-medium push--20">'.$post->post_title.'</div>
 				<div class="hdg hdg--4 text-center gotham-book push--10">'.get_the_excerpt($post->ID).'</div>
@@ -693,14 +698,14 @@ function pull_all_blog(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_blog_count(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'blog',
         'posts_per_page'=>3000,
@@ -709,18 +714,18 @@ function pull_all_blog_count(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	$total = count($myposts);
+    $total = count($myposts);
 
-	echo $total;
+    echo $total;
 
     wp_reset_postdata();
 }
 
 function pull_all_press_count(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'press',
         'posts_per_page'=>3000,
@@ -729,18 +734,18 @@ function pull_all_press_count(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	$total = count($myposts);
+    $total = count($myposts);
 
-	echo $total;
+    echo $total;
 
     wp_reset_postdata();
 }
 
 function pull_all_shop(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'shop',
         'posts_per_page'=>30,
@@ -749,17 +754,17 @@ function pull_all_shop(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$thumbnail = get_field("product_image", $post->ID);
-		$title = get_field("product_title", $post->ID);
-		$desc = get_field("product_description", $post->ID);
-		$price = get_field("product_price", $post->ID);
-		$url = get_field("product_buy_url", $post->ID);
+        $thumbnail = get_field("product_image", $post->ID);
+        $title = get_field("product_title", $post->ID);
+        $desc = get_field("product_description", $post->ID);
+        $price = get_field("product_price", $post->ID);
+        $url = get_field("product_buy_url", $post->ID);
 
-		echo '
+        echo '
 			<div class="columns small-12 medium-4 large-4 grid-item article">
 				<img src="'.$thumbnail.'" width="100%" height="auto">
 				<div class="hdg hdg--4 uppercase red-text text-center gotham-medium push--20">'.$title.'</div>
@@ -772,14 +777,14 @@ function pull_all_shop(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 function pull_all_jobs(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'jobs',
         'posts_per_page'=>300,
@@ -788,16 +793,16 @@ function pull_all_jobs(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$jobTitle = get_field("job_title", $post->ID);
-		$jobLocation = get_field("location", $post->ID);
-		$jobDesc = get_field("job_description", $post->ID);
-		$jobURL = get_field("job_url", $post->ID);
+        $jobTitle = get_field("job_title", $post->ID);
+        $jobLocation = get_field("location", $post->ID);
+        $jobDesc = get_field("job_description", $post->ID);
+        $jobURL = get_field("job_url", $post->ID);
 
-		echo '
+        echo '
 			<div class="columns small-12 content-row clear-left">
 				<div class="hdg hdg--4 gotham-bold">'.$jobTitle.'</div>
 				<div class="hdg hdg--5 gotham-bold">'.$jobLocation.'</div>
@@ -809,34 +814,34 @@ function pull_all_jobs(){
 		';
 
 
-	}
+    }
 
     wp_reset_postdata();
 }
 
 
 function get_latest_ig(){
-	function fetchData($url){
-	  $ch = curl_init();
-	  curl_setopt($ch, CURLOPT_URL, $url);
-	  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	  curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-	  $result = curl_exec($ch);
-	  curl_close($ch);
-	  return $result;
-	}
+    function fetchData($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
 
-	$result = fetchData("https://api.instagram.com/v1/users/20570730/media/recent/?access_token=7943951.1677ed0.87bf15fcf1d04d88a7ffa24aa6fe1343&count=4");
+    $result = fetchData("https://api.instagram.com/v1/users/20570730/media/recent/?access_token=7943951.1677ed0.87bf15fcf1d04d88a7ffa24aa6fe1343&count=4");
 
 
-	$result = json_decode($result);
+    $result = json_decode($result);
     $i = 1;
-	foreach ($result->data as $post) {
-		if(empty($post->caption->text)) {
-			return false;
-	 	} else {
-		 	//error_log(print_r($post->images,1));
-             if($i === 1){
+    foreach ($result->data as $post) {
+        if(empty($post->caption->text)) {
+            return false;
+        } else {
+            //error_log(print_r($post->images,1));
+            if($i === 1){
                 echo '
                     <div class="photo photo--tall" style="background-image: url('.$post->images->standard_resolution->url.');">
                     	<div class="photo__hashtag text-center">
@@ -844,25 +849,25 @@ function get_latest_ig(){
                     	</div>
                     </div>
                 ';
-             }
-             if($i === 2){
+            }
+            if($i === 2){
                 echo '<div class="photo photo--half" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-             }
-             if($i === 3){
+            }
+            if($i === 3){
                 echo '<div class="photo photo--third hide-for-small photo--push" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-             }
-             if($i === 4){
+            }
+            if($i === 4){
                 echo '<div class="photo photo--third photo--push photo--push-left photo-third--expand-small" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-             }
-		 	$i++;
-	 	}
-	}
+            }
+            $i++;
+        }
+    }
 }
 
 
 function pull_recent_press(){
 
-	$args = array(
+    $args = array(
         'post_type'=>'post',
         'category_name' => 'press',
         'posts_per_page'=>1,
@@ -871,13 +876,13 @@ function pull_recent_press(){
         'post_status'=>'publish'
     );
 
-	$myposts = get_posts( $args );
+    $myposts = get_posts( $args );
 
-	foreach($myposts as $post){
+    foreach($myposts as $post){
 
-		$featuredImage = get_field("homepage_featured_image", $post->ID);
+        $featuredImage = get_field("homepage_featured_image", $post->ID);
 
-		echo '
+        echo '
 			<div class="large-7 image-card image-card-7--left image-card--stack-med" style="background-image: url('.$featuredImage.');"></div>
 				<div class="large-5 columns image-card-push-5 image-card--text text-center">
 					<div class="hdg hdg--3 archer-bold hdg--white uppercase">'.$post->post_title.'</div>
@@ -891,9 +896,41 @@ function pull_recent_press(){
 					</div>
 				</div>
 		';
-	}
+    }
 
     wp_reset_postdata();
+}
+
+
+function get_latest_tweets_func(){
+    define('TWEET_LIMIT', 1);
+    define('TWITTER_USERNAME', 'brewlabars');
+    define('CONSUMER_KEY', 'zQvk4LFJc8NH1vjFxsQmw');
+    define('CONSUMER_SECRET', 'DVE3eqpWh3crbi39lRi3PFsf5zENxCuViNXGRjUGc');
+    define('ACCESS_TOKEN', '167151910-hq7anbDrNn0fRGmSwPhx54GEtm0a7jknWfV1d2M');
+    define('ACCESS_TOKEN_SECRET', 'EGpIsxL4bTF3hkn4CVe2wCof9wdCWAAcS9JvvMQrw');
+    # Create the connection
+    $twitter = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+    # Migrate over to SSL/TLS
+    $twitter->ssl_verifypeer = true;
+    # Load the Tweets
+    $tweets = $twitter->get('statuses/user_timeline', array('screen_name' => TWITTER_USERNAME, 'exclude_replies' => 'true', 'include_rts' => 'false', 'count' => TWEET_LIMIT));
+    # Example output
+    $x = 0;
+    if(!empty($tweets)) {
+        foreach($tweets as $tweet) {
+            # Access as an object
+            $tweetText = $tweet->text;
+            # Make links active
+            $tweetText = preg_replace("#(http://|(www.))(([^s<]{4,68})[^s<]*)#", '<a href="http://$2$3" target="_blank">$1$2$4</a>', $tweetText);
+            # Linkify user mentions
+            $tweetText = preg_replace("/@(w+)/", '<a href="http://www.twitter.com/$1" target="_blank">@$1</a>', $tweetText);
+            # Linkify tags
+            $tweetText = preg_replace("/#(w+)/", '<a href="http://search.twitter.com/search?q=$1" target="_blank">#$1</a>', $tweetText);
+            # Output
+            echo $tweetText;
+        }
+    }
 }
 
 function more_post_ajax(){
@@ -918,15 +955,15 @@ function more_post_ajax(){
 
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
 
-    $url = get_permalink($id);
+        $url = get_permalink($id);
     $title = get_the_title();
     $categories = get_the_category($id);
     $excerpt =  get_the_excerpt();
     $id = get_the_ID();
 
-	$thumbnail = get_field("press_page_thumbnail", $id);
+    $thumbnail = get_field("press_page_thumbnail", $id);
 
-	$out .='<div class="columns small-12 medium-4 large-4 grid-item article">
+    $out .='<div class="columns small-12 medium-4 large-4 grid-item article">
 		<img src="'.$thumbnail.'" width="100%" height="auto">
 		<div class="hdg hdg--4 uppercase red-text text-center gotham-medium push--20">'.$title.'</div>
 		<div class="hdg hdg--4 text-center gotham-book push--10">'.$excerpt.'</div>

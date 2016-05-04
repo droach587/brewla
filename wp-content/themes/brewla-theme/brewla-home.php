@@ -48,7 +48,7 @@ get_header();
 				</div>
 				<div class="columns large-10">
 					<div class="hdg hdg--3 archer-bold hdg--white push--20 break-work">
-						Excited to learn about #rethink coding @girlswhocode founder Reshma Saujani - so inspiring!! @ Grind http://instagram.com/p/qML4P2C26W/
+    					<?php get_latest_tweets_func(); ?>
 					</div>
 				</div>
 			</div>
