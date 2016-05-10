@@ -204,6 +204,54 @@ function pull_all_jobs_hero(){
 }
 
 
+function pull_all_locations_hero(){
+
+    $args = array(
+        'post_type'=>'post',
+        'category_name' => 'locations-hero',
+        'posts_per_page'=>30,
+        'order'=>'ASC',
+        'orderby'=>'date',
+        'post_status'=>'publish'
+    );
+
+    $myposts = get_posts( $args );
+
+    foreach($myposts as $post){
+
+        $bgImage = get_field("background_image", $post->ID);
+        $productImage = (get_field("pop_image", $post->ID))? get_field("pop_image", $post->ID) : false ;
+        $headline = get_field("headline", $post->ID);
+        $subHeadline = get_field("sub_headline", $post->ID);
+
+        if($productImage){
+            echo '
+				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
+				<div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
+				<div class="hero__content-box">
+				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
+				        <div class="hdg hdg--3 gotham-bold hdg--white uppercase">'.$subHeadline.'</div>
+			        </div>
+				</div>
+			';
+        }else{
+            echo '
+				<div class="hero__slide hero__slide--short" style="background-image: url('.$bgImage.') !important;">
+				<div class="hero__content-box">
+				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
+				        <div class="hdg hdg--3 gotham-bold hdg--white uppercase">'.$subHeadline.'</div>
+			        </div>
+				</div>
+			';
+        }
+
+
+    }
+
+    wp_reset_postdata();
+}
+
+
 function pull_all_about_hero(){
 
     $args = array(
@@ -470,6 +518,14 @@ function pull_all_hp_about_lead(){
 		    </div>
         </div>
 	';
+}
+
+
+function pull_locations_content(){
+
+    $location_content = get_field("prolo_finder_id", $page->ID);
+
+    echo $location_content;
 }
 
 function pull_about_lead(){

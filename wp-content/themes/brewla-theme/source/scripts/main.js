@@ -128,11 +128,7 @@ var mainJs = (function () {
             mobileNav();
             search();
             slickSlider();
-            $('.fancybox').fancybox();
-            
-            $('.fancybox-parent').each(function(){
-	           $(this).find('a').addClass('fancybox').fancybox(); 
-            });
+            $('a.fancybox, .fancybox-parent a').fancybox();
             
             $grid.masonry({
 			  // options
