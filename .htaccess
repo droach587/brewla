@@ -8,3 +8,16 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
+
+#Needed to re-write URLS for uploads to stage, optional
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^(www\.)?brewla\.dev$ [NC]
+RewriteRule ^wp-content/uploads/(.*)$ http://brewla-wp.djrfive.com/wp-content/uploads/$1 [L,R=301,NC]
+
+
+
+
+ 

@@ -9419,6 +9419,14 @@ var mainJs = (function () {
 			  itemSelector: '.grid-item'
 			});
 			
+			
+			setTimeout(function(){
+				$grid.masonry({
+				  // options
+				  itemSelector: '.grid-item'
+				});
+			}, 200);
+			
 			initLoadMore();
             
         }

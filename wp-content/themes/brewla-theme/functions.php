@@ -627,7 +627,7 @@ function pull_all_flavors(){
     foreach($myposts as $post){
 
         $boxImage = get_field("box_image", $post->ID);
-        $gmo = (get_field("gmo_tag", $post->ID))? '<img class="inline-block push--30" src="/wp-content/themes/brewla-theme/assets/img/gmo2x.png" width="60" height="auto">' : '';
+        $gmo = (get_field("gmo_tag", $post->ID) === 'true')? '<img class="inline-block push--30" src="/wp-content/themes/brewla-theme/assets/img/gmo2x.png" width="60" height="auto">' : '';
         $tagline = get_field("flavor_tagline", $post->ID);
         $flavor = get_field("flavor_title", $post->ID);
         $headlineColor = get_field("headline_color", $post->ID);
@@ -887,7 +887,7 @@ function get_latest_ig(){
         return $result;
     }
 
-    $result = fetchData("https://api.instagram.com/v1/users/20570730/media/recent/?access_token=7943951.1677ed0.87bf15fcf1d04d88a7ffa24aa6fe1343&count=4");
+    $result = fetchData("https://api.instagram.com/v1/users/self/media/recent/?access_token=20570730.6b601a2.3d05593431764615ae24f107a333dabc&count=4");
 
 
     $result = json_decode($result);

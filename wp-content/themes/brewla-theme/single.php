@@ -28,10 +28,12 @@ get_header();
 
 			<div class="full-width push--20">
 	            <div class="float-left post-link">
-		            <?php previous_post_link( '%link', '&larr; %title', $in_same_term = true ); ?>
-	            </div>
-	            <div class="float-right post-link">
-		            <?php next_post_link( '%link', '%title &rarr;', $in_same_term = true ); ?>
+		            <?php 
+			        	$cats = get_the_category();
+						$cat_name = $cats[0]->name;
+						$cat_slug = $cats[0]->slug;    
+			        ?>
+		            <a href="/<?php echo strtolower($cat_slug); ?>">&laquo; Back to <?php echo $cat_name; ?></a>
 	            </div>
             </div>
     
