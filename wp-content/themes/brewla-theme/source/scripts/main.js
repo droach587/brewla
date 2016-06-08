@@ -93,6 +93,12 @@ var mainJs = (function () {
 		                if($data.length){
 		                    var $items = $(data);
 		                    $itemList.append( $items ).masonry( 'appended', $items );
+		                    setTimeout(function(){
+			                    $grid.masonry({
+								  // options
+								  itemSelector: '.grid-item'
+								});
+		                    }, 200);
 		                    $("#more_posts").html('SHOW MORE');
 		                } else {
 		                    $("#more_posts").html('NO MORE POSTS...');
@@ -141,7 +147,7 @@ var mainJs = (function () {
 				  // options
 				  itemSelector: '.grid-item'
 				});
-			}, 200);
+			}, 500);
 			
 			initLoadMore();
             

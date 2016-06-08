@@ -94,15 +94,20 @@ function pull_all_hp_hero(){
         $productImage = get_field("pop_image", $post->ID);
         $headline = get_field("headline", $post->ID);
         $subHeadline = get_field("sub_headline", $post->ID);
-
+        $productURL = get_field("product_url", $post->ID);
+		
+		error_log(print_r($productURL,1));
+		
         echo '
-			<div class="hero__slide" style="background-image: url('.$bgImage.') !important;">
-		        <div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
-		        <div class="hero__content-box">
-			        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
-			        <div class="hdg hdg--3 gotham-bold hdg--white uppercase">'.$subHeadline.'</div>
-		        </div>
-			</div>
+        	<a href="'.$productURL.'">
+				<div class="hero__slide" style="background-image: url('.$bgImage.') !important;">
+			        <div class="hero__bar" style="background-image: url('.$productImage.') !important;"></div>
+			        <div class="hero__content-box">
+				        <div class="hdg hdg--1 archer-bold hdg--white uppercase">'.$headline.'</div>
+				        <div class="hdg hdg--3 gotham-bold hdg--white uppercase">'.$subHeadline.'</div>
+			        </div>
+				</div>
+			</a>
 		';
     }
 

@@ -24,8 +24,7 @@
 
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-    <link rel="shortcut icon" href="<?php echo bloginfo('template_directory'); ?>/favicon.png">
-	<link rel="apple-touch-icon" href="<?php echo bloginfo('template_directory'); ?>/apple-touch-icon-precomposed.png"/>
+    <link rel="shortcut icon" href="<?php echo bloginfo('template_directory'); ?>/favicon.ico">
 	<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 	<script src="<?php echo bloginfo('template_directory'); ?>/assets/scripts/vendor-non-build/modernizr.custom.71136.js"></script>
 
