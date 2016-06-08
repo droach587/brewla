@@ -95,9 +95,9 @@ function pull_all_hp_hero(){
         $headline = get_field("headline", $post->ID);
         $subHeadline = get_field("sub_headline", $post->ID);
         $productURL = get_field("product_url", $post->ID);
-		
+
 		error_log(print_r($productURL,1));
-		
+
         echo '
         	<a href="'.$productURL.'">
 				<div class="hero__slide" style="background-image: url('.$bgImage.') !important;">
@@ -926,11 +926,11 @@ function get_latest_ig(){
 }
 
 
-function pull_recent_press(){
+function pull_recent_blog(){
 
     $args = array(
         'post_type'=>'post',
-        'category_name' => 'press',
+        'category_name' => 'blog',
         'posts_per_page'=>1,
         'order'=>'DESC',
         'orderby'=>'date',

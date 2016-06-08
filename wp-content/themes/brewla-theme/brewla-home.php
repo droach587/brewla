@@ -56,7 +56,7 @@ get_header();
 	</div>
 
 	<div class="full-width section section--no-padding">
-		<?php pull_recent_press(); ?>
+		<?php pull_recent_blog(); ?>
 	</div>
 
 <!-- Section Terminates Here -->
