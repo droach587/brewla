@@ -377,7 +377,7 @@
 
 	.image-card-7--left{
 		left: 0px;
-		background-position: center top;
+		background-position: center center;
 	}
 
 	.image-card-push-5{
@@ -423,6 +423,7 @@
 		left: 41.66667%;
 		width: 58.33333%;
 		height: 100%;
+		overflow: hidden;
 		.photo{
 			position: absolute;
 			top: 0px;
@@ -653,3 +654,77 @@
 			font-size: 14px;
 		}
 	}
+	
+	
+.ig-feed{
+  width: 200%;
+  height:200%;
+  background:$client-red;
+  display:block;
+  float:left;
+  position: relative;
+  .inner{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+	background: -moz-linear-gradient(top,  rgba(224,121,121,0) 0%, rgba(227,101,100,0) 33%, rgba(232,60,58,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(224,121,121,0) 0%,rgba(227,101,100,0) 33%,rgba(232,60,58,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(224,121,121,0) 0%,rgba(227,101,100,0) 33%,rgba(232,60,58,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e07979', endColorstr='#e83c3a',GradientType=0 ); /* IE6-9 */
+
+  }
+}
+
+@media screen and (max-width:640px){
+	.ig-feed{
+		max-height: 640px !important;
+		overflow: hidden !important;
+	}
+}
+
+.ig-feed{
+  line-height:0;
+  div{
+    float:left;
+    position:relative;
+    box-sizing:border-box;
+    border:1px solid white;
+    a{
+	    display: inline-block;
+    }
+    img{
+      width:100%;
+      height:auto;
+    }
+  }
+}
+
+.large{
+  width:640px;
+  height:640px;
+}
+
+.small{
+  width:160px;
+  height:160px;
+}
+
+.medium{
+  width:320px;
+  height:320px;
+}
+
+
+.lwlw{
+	position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 98899;
+    text-align: center;
+    background: rgba($client-red, .6);
+    padding: 20px;
+    @include box-sizing(border-box);
+}

@@ -1,9 +1,9 @@
 var mainJs = (function () {
- 		
+
  		/**
  		 * Avoid Console Errors
  		 *
- 		 * 
+ 		 *
  		 */
 		(function() {
 		    var method;
@@ -16,71 +16,71 @@ var mainJs = (function () {
 		    ];
 		    var length = methods.length;
 		    var console = (window.console = window.console || {});
-		
+
 		    while (length--) {
 		        method = methods[length];
-		
+
 		        // Only stub undefined methods.
 		        if (!console[method]) {
 		            console[method] = noop;
 		        }
 		    }
 		}());
-		
-		
+
+
 		var $grid = $('.general-grid');
-		
+
 		function mobileNav(){
-			
+
 			var $element = $('.mobile-nav-toggle');
 			var active = 'isActive';
 			var $target = $('.primary-nav');
-			
+
 			$element.on('click', function(e){
-				
+
 				$target.toggleClass(active);
 				$element.toggleClass(active);
-				
+
 				e.preventDefault();
 			});
-			
+
 		}
-		
+
 		function search(){
-			
+
 			var $element = $('.primary-nav__search a');
 			var $target = $('.primary-header__search');
 			var active = 'isActive';
-			
+
 			$element.on('click', function(e){
 				$target.toggleClass(active);
 				e.preventDefault();
 			});
 		}
-		
+
 		function slickSlider(){
 			$('.hero__container').slick({
 				fade: true,
 				dots: true,
 				arrows: false,
-			});		
+			});
 		}
-		
+
 		function initLoadMore(){
-			
+
 		    var ppp = 3; // Post per page
 		    var pageNumber = 1,
 		        $itemList = $grid,
 		        totalPosts = parseInt($('.general-grid').attr('data-count'));
-		        
+
 		    if (totalPosts > ppp) {
                 $(".more-post-cont").removeClass('hidden');
             }
-		
+
 		    var load_posts = function(cat){
-		
+
 		        var category = (cat)? '&cat='+cat : '';
-		
+
 		        pageNumber++;
 		        var str = '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=more_post_ajax' + category;
 		        $.ajax({
@@ -106,58 +106,64 @@ var mainJs = (function () {
 		                        $("#more_posts").hide().parent().hide();
 		                    }, 500);
 		                }
-						
+
 
 		            },
 		            error : function(jqXHR, textStatus, errorThrown) {
 		                $loader.html(jqXHR + " :: " + textStatus + " :: " + errorThrown);
 		            }
-		
+
 		        });
 		        return false;
 		    }
-		
+
 		    $("#more_posts").on("click",function(){ // When btn is pressed.
 		        var cat = ($(this).attr('data-cat'))? $(this).attr('data-cat') : false;
 		        $("#more_posts").html('LOADING'); // Disable the button, temp.
 		        load_posts(cat);
 		    });
-		
+
 		}
- 		
+
  		/**
  		 * Simple Init Function
  		 *
- 		 * 
+ 		 *
  		 */
         function init() {
             mobileNav();
             search();
             slickSlider();
             $('a.fancybox, .fancybox-parent a').fancybox();
-            
+
             $grid.masonry({
 			  // options
 			  itemSelector: '.grid-item'
 			});
-			
-			
+
+
 			setTimeout(function(){
 				$grid.masonry({
 				  // options
 				  itemSelector: '.grid-item'
 				});
 			}, 500);
-			
+
 			initLoadMore();
-            
+
+			$('.ig-feed').masonry({
+			  // options...
+			  itemSelector: 'div',
+			  columnWidth: 160
+			});
+
         }
- 
- 
+
+
         /**
          * Reveal All Methods here
          *
-         * 
+         *
          */
         return {
             init 	:	init

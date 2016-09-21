@@ -892,37 +892,22 @@ function get_latest_ig(){
         return $result;
     }
 
-    $result = fetchData("https://api.instagram.com/v1/users/self/media/recent/?access_token=20570730.6b601a2.3d05593431764615ae24f107a333dabc&count=4");
+    $result = fetchData("https://api.instagram.com/v1/users/self/media/recent/?access_token=20570730.6b601a2.3d05593431764615ae24f107a333dabc&count=60");
 
 
     $result = json_decode($result);
     $i = 1;
+    //$rand = array("small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "small", "medium", "medium", "medium","medium", "medium", "medium", "large", "large", "large");
+    echo '<div class="ig-feed">';
     foreach ($result->data as $post) {
         if(empty($post->caption->text)) {
             return false;
         } else {
-            //error_log(print_r($post->images,1));
-            if($i === 1){
-                echo '
-                    <div class="photo photo--tall" style="background-image: url('.$post->images->standard_resolution->url.');">
-                    	<div class="photo__hashtag text-center">
-                    		<a class="hdg hdg--3 gotham-bold hdg--white" href="https://www.instagram.com/brewlabars/" target="_blank">#LickWellLiveWell</a>
-                    	</div>
-                    </div>
-                ';
-            }
-            if($i === 2){
-                echo '<div class="photo photo--half" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-            }
-            if($i === 3){
-                echo '<div class="photo photo--third hide-for-small photo--push" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-            }
-            if($i === 4){
-                echo '<div class="photo photo--third photo--push photo--push-left photo-third--expand-small" style="background-image: url('.$post->images->standard_resolution->url.');"></div>';
-            }
-            $i++;
+			//echo '<div class="'.$rand[array_rand($rand)].'"><a href="'.$post->link.'"><img src="'.$post->images->standard_resolution->url.'"></a></div>';
+			echo '<div class="medium"><a href="'.$post->link.'"><img src="'.$post->images->standard_resolution->url.'"></a></div>';
         }
     }
+	echo '</div>';
 }
 
 
@@ -957,6 +942,30 @@ function pull_recent_blog(){
 					</div>
 				</div>
 		';
+    }
+
+    wp_reset_postdata();
+}
+
+
+function pull_flavor_image(){
+
+    $args = array(
+        'post_type'=>'post',
+        'category_name' => 'hp-flavor-image',
+        'posts_per_page'=>1,
+        'order'=>'DESC',
+        'orderby'=>'date',
+        'post_status'=>'publish'
+    );
+
+    $myposts = get_posts( $args );
+
+    foreach($myposts as $post){
+
+        $flavormage = get_field("pack_image", $post->ID);
+
+        echo $flavormage;
     }
 
     wp_reset_postdata();
@@ -1012,7 +1021,7 @@ function more_post_ajax(){
 
     if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
 
-        $url = get_permalink($id);
+    $url = get_post_permalink($id);
     $title = get_the_title();
     $categories = get_the_category($id);
     $excerpt =  get_the_excerpt();
@@ -1025,7 +1034,7 @@ function more_post_ajax(){
 		<div class="hdg hdg--4 uppercase red-text text-center gotham-medium push--20">'.$title.'</div>
 		<div class="hdg hdg--4 text-center gotham-book push--10">'.$excerpt.'</div>
 		<div class="full-width push--20 text-center">
-			<a href="'.$url.'" class="link gotham-bold uppercase">read more</a>
+			<a href="'.get_post_permalink($id).'" class="link gotham-bold uppercase">read more</a>
 		</div>
 	</div>';
 

@@ -59,9 +59,11 @@
 		<div class="stick__inner text-center">
 			<h2 class="stick__heading archer-bold hdg--2 uppercase">stick with us!</h2>
 			<p class="hdg--4"><?php pull_stick_with_us(); ?></p>
-			<form>
-				<input type="email" placeholder="Please enter your email address"></input>
-				<button class="btn btn--black push--10">sign up</button>
+			<form action="//brewlabars.us1.list-manage.com/subscribe/post?u=f3ab616c41ca5834cb5391e20&amp;id=e9deb3496f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Your Email Address...">
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f3ab616c41ca5834cb5391e20_e9deb3496f" tabindex="-1" value=""></div>
+				<button class="btn btn--black push--10" id="mc-embedded-subscribe">sign up</button>
 			</form>
 		</div>
 	</div>

@@ -23,13 +23,14 @@ get_header();
 		<div class="card card--red columns large-5 medium-12 text-center">
 			<div class="hdg hdg--2 archer-bold hdg--white uppercase">brewla flavors</div>
 			<div class="push--20">
-				<a href="/flavors"><img src="<?php echo bloginfo('template_directory'); ?>/assets/img/brewla-flavors-2x.png" width="100%" height="auto"></a>
+				<a href="/flavors"><img src="<?php pull_flavor_image(); ?>" width="100%" height="auto"></a>
 			</div>
 			<div class="push--20">
 				<div class="hdg hdg--white gotham-bold hdg--4 hdg--white">50 calories or less &bull; Craft-brewed ingredients</div>
 			</div>
 		</div>
 		<div class="float-left large-7 medium-12 photo-grid">
+			<div class="hdg hdg--2 archer-bold hdg--white lwlw">#lickwelllivewell</div>
     		<?php get_latest_ig(); ?>
 		</div>
 	</div>
